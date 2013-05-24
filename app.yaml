@@ -1,0 +1,21 @@
+application: baklava-word-frq
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+
+- url: /favicon.ico
+  static_files: favicon.ico
+  upload: favicon.ico
+
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /.*
+  script: wordparser.app
+
+libraries:
+- name: jinja2
+  version: latest

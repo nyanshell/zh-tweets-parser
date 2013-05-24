@@ -1,0 +1,20 @@
+body {
+  font-family: Verdana, Helvetica, sans-serif;
+    background-color : transparent;
+    background-image : url("back.png");
+    background-attachment: scroll;
+}
+div.comment, div.result_box {
+      margin:30px 50px;
+      background-color:rgba(255,255,255,0.6);
+      border:1px solid black;
+      filter:alpha(opacity=60); /* For IE8 and earlier */
+  }
+
+div.comment:hover, div.result_box:hover {
+      margin:30px 50px;
+      background-color: gray;
+      border:1px solid black;
+      opacity:1.0;
+      filter:alpha(opacity=60); /* For IE8 and earlier*/
+

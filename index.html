@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+      <title>Nyan~</title>
+  </head>
+  <body>
+
+</ul>
+    {% if word %}
+        post:
+    {% endif %}
+    <!-- display words -->
+    {% for word in words %}
+        <div class="comment" >{{ word.word|escape }} {{word.count|escape }}</div>
+    {% endfor %}
+    <!-- input username and fetch 200 tweets -->
+    <form action="/fetch" method="post">
+      <div>Input twitter user name( without @ )</div>
+      <div><textarea name="username" rows="1" cols="10"></textarea><input    type="submit" value="analyze tweets"></div>
+    </form>
+    
+    <!-- Sign and date the page, it's only polite! -->
+    <address>2013-05-22 15:09:33<br>
+    by Baklava for test using</br></address>
+    <div>
+        <img src="https://developers.google.com/appengine/images/appengine-noborder-120x30.gif" alt="Powered by Google App Engine" />
+    </div>
+  </body>
+</html>
