@@ -22,15 +22,13 @@ Deploy
   
   3. Create an application on GAE, [upload application use appcfg.py] 
   
-  4. Done
+  4. Adjust Frontend Instance Class to F2, Done
 
-Issues
-------
-  - Fatal Error: Memory Limit Exceeded on GAE while request
-
-TODO-LIST
+TODO
 ---------
-  - Fix MLE error
+  - use regex to substitute http links in tweet
+  - Spot Chinese words, Twitter's lang entity is not very accurate
+  - show word frequency in percentage
 
 Changelog
 ---------
