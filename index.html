@@ -15,11 +15,24 @@
     {% for word in words %}
         <div class="comment" >{{ word.word|escape }} {{word.count|escape }}</div>
     {% endfor %}
+    <h1>analyze tweets</h1>
     <!-- input username and fetch 200 tweets -->
     <form action="/fetch" method="post">
       <div>Input twitter user name( without @ )</div>
-      <div><textarea name="username" rows="1" cols="10"></textarea><input    type="submit" value="analyze tweets"></div>
+      <div>
+        <textarea name="username" rows="1" cols="10"></textarea>
+        <input type="submit" value="analyze tweets"></div>
     </form>
+    <!-- fetch and shwo tweets for test use -->
+    <h1>Or only show some tweets</h1>
+    <form action="/list" method="post">
+      <div>Input twitter user name( without @ )</div>
+      <div>
+        <textarea name="username" rows="1" cols="10"></textarea>
+        <input type="submit" value="fetch tweets"></div>
+    </form>
+
+    
     
     <!-- Sign and date the page, it's only polite! -->
     <address>2013-05-22 15:09:33<br>

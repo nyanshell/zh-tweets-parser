@@ -20,7 +20,7 @@ FETCH_WORD_RANK_CNT = 10
 
 class Words(db.Model):
     word = db.StringProperty()
-    count = db.IntegerProperty(default=0 )
+    count = db.IntegerProperty(default=1 )
 
 def get_word_key(word_key=None):
     return db.Key().from_path('Words', word_key)
@@ -38,7 +38,7 @@ class MainPage(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('index.html')
         self.response.write(template.render(template_values))
 
-class FetchTweets(webapp2.RequestHandler):
+class AnalyzeTweets(webapp2.RequestHandler):
     """
     if user_name exist, fetch FETCH_TWEET_CNT tweets
     else display no such user
@@ -57,7 +57,7 @@ class FetchTweets(webapp2.RequestHandler):
                 if sys.getsizeof( w ) > 32: # more than two zh char
                     #word_data = Words.get(keys=w)
                     word_data = Words.gql("WHERE word = :1", w).get()
-                    print word_data.__class__
+                    #print word_data.__class__
                     if word_data == None:
                         word_data = Words( get_word_key( w ) )
                         word_data.word = w
@@ -68,5 +68,27 @@ class FetchTweets(webapp2.RequestHandler):
         #redirect
         self.redirect('/')
 
-app = webapp2.WSGIApplication([('/', MainPage), ('/fetch', FetchTweets)] , debug=True)
+class ShowTweets(webapp2.RequestHandler):
+    """
+    List fetched tweets, for test use
+    not to save in DB
+    """
+    def post(self):
+
+        user_name = self.request.get('username', FETCH_TWEET_CNT )
+
+        tweets_entites = TweetsFetcher.request_timeline.get_tweets( user_name, FETCH_TWEET_CNT )
+        
+        template_values = {
+            'tweets': tweets_entites,
+            'user': user_name
+        }
+
+        template = JINJA_ENVIRONMENT.get_template('show_tweet.html')
+        self.response.write(template.render(template_values))
+
+
+app = webapp2.WSGIApplication([('/', MainPage),
+                             ('/fetch', AnalyzeTweets ),
+                             ('/list', ShowTweets )] , debug=True)
 
