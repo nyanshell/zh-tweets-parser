@@ -1,5 +1,5 @@
 baklava-zh-tweet-parser
-=========
+=======================
 
 A Chinese tweets parser web app, use [Jieba] for word segmentation.
 
@@ -27,13 +27,17 @@ Deploy
 TODO
 ---------
   - Spot Chinese words, Twitter's language machine-detect is not very accurate, traditional Chinese may detected as Japanese.
+  
   - count total word number and show word frequency in percentage
 
 Changelog
 ---------
-  - 25/05/2013 add regex to spot http links in tweet and only parse Chinese tweets
+  - 27/05/2013 add regex to remove English words in tweet
+  
+  - 25/05/2013 add regex to remove http links in tweet and only parse Chinese tweets
 
-  - 24/05/2013 upload refactor code, unfork from Jieba, turned into 
+  - 24/05/2013 upload refactor code, unfork from Jieba, turned into
+   
   a "normal" repository( Because it will never merge back ).
   
   - 23/05/2013 disable temporary file( because GAE not support )
