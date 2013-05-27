@@ -21,6 +21,8 @@ FETCH_WORD_RANK_CNT = 10
 
 HTTP_SUB_REGEX = re.compile('(https?://[\S]+)')
 
+EN_WORDS_SUB_REGEX = re.compile('(\w+)')
+
 class Words(db.Model):
     word = db.StringProperty()
     count = db.IntegerProperty(default=1 )
@@ -55,11 +57,13 @@ class AnalyzeTweets(webapp2.RequestHandler):
         tweets_entites = TweetsFetcher.request_timeline.get_tweets( user_name, FETCH_TWEET_CNT )
         
         for tweet in tweets_entites:
-            if (tweet[ 'lang' ] == 'zh') or (tweet[ 'lang' ] == 'jp'):
             # some traditional Chinese tweet may be detected as japanese
+            if (tweet[ 'lang' ] == 'zh') or (tweet[ 'lang' ] == 'jp'):
+                #words in tweet_word_list should check to ensure they're all Chinese words, or use regex to remove non-Chinese words
                 tweet_text = HTTP_SUB_REGEX.sub( '', tweet[ 'text' ] )
+                tweet_text = EN_WORDS_SUB_REGEX.sub( '', tweet[ 'text' ] )
                 tweet_word_list = list( jieba.cut( tweet_text ) )
-                #words in tweet_word_list should check to ensure they're all Chinese words
+
                 for w in tweet_word_list:
                     if sys.getsizeof( w ) > 32: # more than two zh char
                         #word_data = Words.get(keys=w)
